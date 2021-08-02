@@ -197,7 +197,7 @@
 
 
 
-![Layered Architecture](./Layered_Architecture.PNG)
+![Layered Architecture](Layered_Architecture.PNG)
 
 흔히 많은 개발자들이 사용하는 Layered Architecture 입니다.
 
