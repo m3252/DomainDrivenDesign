@@ -130,3 +130,58 @@ Entity의 근본적인 개념은 객체의 생명주기 내내 이어지는 추�
 
 ---
 
+>
+> ✍🏼When programming, I often find it's useful to represent things as a compound. <br>
+> A 2D coordinate consists of an x value and y value.<br>
+> An amount of money consists of a number and a currency.<br>
+> A date range consists of start and end dates,<br>
+> which themselves can be compounds of year, month, and day.<br>
+> 
+> 
+> 🔍프로그래밍할 때, 사물을 복합물로 표현하는 것이 유용한 경우가 종종 있다.<br>
+> 예를 들어, 2차원 좌표는 x, y로 이루어져 있고,<br>
+> 돈이나 통화 같은 경우 숫자로 이루어져 있다.<br>
+> 날짜의 범위는 시작 날짜와 종료날짜로 구성될 수 있고,<br>
+> 연도와 월, 일의 복합물일 수 도 있다
+>
+>  -Martin Fowler-
+
+#### 즉, Value Object (값 객체) 는 한개 혹은 그 이상의 속성들을 하나의 의미있는 값으로 묶어서 특정 값을 나타내는 객체를 의미합니다.
+
+- 모델에 포함된 어떤 요소의 속성에만 관심이 있다면 그것을 Value Object로 분류하라.
+- Value Object는 간혹 Method의 매개변수로 전달되기도 한다.
+- Value Object는 불변(Immutable)으로 다뤄야 한다.
+- Value Object에는 아무런 식별성도 부여하지 말고 Entity를 유지하는 데 필요한 설계상의 복잡성을 피하라. 
+
+#### 다음 예제를 확인해보겠습니다.
+
+해당 예저는 Value Object가 없는 Customer를 ValueObject 를통해 분리하였을때의 모습입니다.
+
+![image](./image.jpg)
+```java
+// Value Object 를 사용하지 않았을때의 Customer
+public class Customer {
+  private String 고객ID;
+  private String 이름;
+  private String 읍면동; 
+  private String 시군구;
+  private String 도;
+}
+```
+
+
+```java
+// Value Object 를 사용하였을떄
+public class Customer {
+  private String 고객ID;
+  private String 이름;
+  private Address 주소;
+}
+
+public class Address {
+    private String 읍면동;
+    private String 시군구;
+    private String 도;
+}
+```
+Value Object를 사용하면 다음과 같이 Person내부의 Address로 완전한 주소를 구성함으로써 더 단순한 Person과 응집력 있는 Value Object인 Address를 만들어낸다.
